@@ -37,7 +37,7 @@ Theta1 = reshape(nn_params(1:hidden_layer_size * (input_layer_size + 1)), ...
 Theta2 = reshape(nn_params((1 + (hidden_layer_size * (input_layer_size + 1))):end), ...
                  output_layer_size, (hidden_layer_size + 1));
 
-save('TrainedParams.m', 'Theta1', 'Theta2');
+save('TrainedParams.mat', 'Theta1', 'Theta2');
 pred = Predict(Theta1, Theta2, X);
 
 fprintf('Training Set Accuracy: %f\n', mean(double(pred == y)) * 100);
