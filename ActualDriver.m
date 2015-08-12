@@ -9,8 +9,9 @@ while true
     % take screenshot and edit image
     img = screenShotRGB(500, 300, 901, 301);
     resizedImg = imresize(img, 0.2);
-    finalImg = im2bw(resizedImg);
-     imshow(finalImg);
+    hsvImage = rgb2hsv(resizedImg);
+	sImage = hsvImage(:,:,2) * 2; % increase saturation 100%
+    finalImg = im2bw(sImage);
 
     % create features
     final = logical.empty;

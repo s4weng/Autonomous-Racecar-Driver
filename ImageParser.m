@@ -7,7 +7,9 @@ for i = 10:553
     img = imread(imgFile);
     croppedImg = imcrop(img, [500 300 900 300]);
     resizedImg = imresize(croppedImg, 0.2);
-    finalImg = im2bw(resizedImg);
+    hsvImage = rgb2hsv(resizedImg);
+	sImage = hsvImage(:,:,2) * 2;
+    finalImg = im2bw(sImage);
     final = [final; reshape(finalImg, [1, size(finalImg, 1)*size(finalImg, 2)])];
     imshow(finalImg);
 end
