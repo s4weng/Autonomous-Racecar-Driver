@@ -22,7 +22,7 @@ while true
     h1 = Sigmoid(final * Theta1');
     h1 = [1 h1];
     h2 = Sigmoid(h1 * Theta2');
-    [p, p] = max(h2);
+    [p, p] = max(h2)
     
     
 % Up Brake Left Right Output
@@ -45,63 +45,66 @@ while true
 
 % all keys are typed out because they are held down unless released
     if p == 1
-        driver.keyRelease(java.awt.event.KeyEvent.VK_UP);
-        driver.keyRelease(java.awt.event.KeyEvent.VK_SPACE);
-        driver.keyRelease(java.awt.event.KeyEvent.VK_LEFT);
-        driver.keyRelease(java.awt.event.KeyEvent.VK_RIGHT);
+        driver.keyRelease(java.awt.event.KeyEvent.VK_W);
+        driver.keyRelease(java.awt.event.KeyEvent.VK_S);
+        driver.keyRelease(java.awt.event.KeyEvent.VK_A);
+        driver.keyRelease(java.awt.event.KeyEvent.VK_D);
         
     elseif p == 2
-        driver.keyRelease(java.awt.event.KeyEvent.VK_UP);
-        driver.keyRelease(java.awt.event.KeyEvent.VK_SPACE);
-        driver.keyRelease(java.awt.event.KeyEvent.VK_LEFT);
-        driver.keyPress(java.awt.event.KeyEvent.VK_RIGHT);
+        driver.keyRelease(java.awt.event.KeyEvent.VK_W);
+        driver.keyRelease(java.awt.event.KeyEvent.VK_S);
+        driver.keyRelease(java.awt.event.KeyEvent.VK_A);
+        driver.keyPress(java.awt.event.KeyEvent.VK_D);
         
     elseif p == 3
-        driver.keyRelease(java.awt.event.KeyEvent.VK_UP);
-        driver.keyRelease(java.awt.event.KeyEvent.VK_SPACE);
-        driver.keyPress(java.awt.event.KeyEvent.VK_LEFT);
-        driver.keyRelease(java.awt.event.KeyEvent.VK_RIGHT);
+        driver.keyRelease(java.awt.event.KeyEvent.VK_W);
+        driver.keyRelease(java.awt.event.KeyEvent.VK_S);
+        driver.keyPress(java.awt.event.KeyEvent.VK_A);
+        driver.keyRelease(java.awt.event.KeyEvent.VK_D);
         
     elseif p == 5
-        driver.keyRelease(java.awt.event.KeyEvent.VK_UP);
-        driver.keyPress(java.awt.event.KeyEvent.VK_SPACE);
-        driver.keyRelease(java.awt.event.KeyEvent.VK_LEFT);
-        driver.keyRelease(java.awt.event.KeyEvent.VK_RIGHT);
+        driver.keyRelease(java.awt.event.KeyEvent.VK_W);
+        driver.keyPress(java.awt.event.KeyEvent.VK_S);
+        driver.keyRelease(java.awt.event.KeyEvent.VK_A);
+        driver.keyRelease(java.awt.event.KeyEvent.VK_D);
         
     elseif p == 6
-        driver.keyRelease(java.awt.event.KeyEvent.VK_UP);
-        driver.keyPress(java.awt.event.KeyEvent.VK_SPACE);
-        driver.keyRelease(java.awt.event.KeyEvent.VK_LEFT);
-        driver.keyPress(java.awt.event.KeyEvent.VK_RIGHT);
+        driver.keyRelease(java.awt.event.KeyEvent.VK_W);
+        driver.keyPress(java.awt.event.KeyEvent.VK_S);
+        driver.keyRelease(java.awt.event.KeyEvent.VK_A);
+        driver.keyPress(java.awt.event.KeyEvent.VK_D);
         
     elseif p == 7
-        driver.keyRelease(java.awt.event.KeyEvent.VK_UP);
-        driver.keyPress(java.awt.event.KeyEvent.VK_SPACE);
-        driver.keyPress(java.awt.event.KeyEvent.VK_LEFT);
-        driver.keyRelease(java.awt.event.KeyEvent.VK_RIGHT);
+        driver.keyRelease(java.awt.event.KeyEvent.VK_W);
+        driver.keyPress(java.awt.event.KeyEvent.VK_S);
+        driver.keyPress(java.awt.event.KeyEvent.VK_A);
+        driver.keyRelease(java.awt.event.KeyEvent.VK_D);
         
     elseif p == 9
-        driver.keyPress(java.awt.event.KeyEvent.VK_UP);
-        driver.keyRelease(java.awt.event.KeyEvent.VK_SPACE);
-        driver.keyRelease(java.awt.event.KeyEvent.VK_LEFT);
-        driver.keyRelease(java.awt.event.KeyEvent.VK_RIGHT);
+        driver.keyPress(java.awt.event.KeyEvent.VK_W);
+        driver.keyRelease(java.awt.event.KeyEvent.VK_S);
+        driver.keyRelease(java.awt.event.KeyEvent.VK_A);
+        driver.keyRelease(java.awt.event.KeyEvent.VK_D);
         
     elseif p == 10
-        driver.keyPress(java.awt.event.KeyEvent.VK_UP);
-        driver.keyRelease(java.awt.event.KeyEvent.VK_SPACE);
-        driver.keyRelease(java.awt.event.KeyEvent.VK_LEFT);
-        driver.keyPress(java.awt.event.KeyEvent.VK_RIGHT);
+        driver.keyPress(java.awt.event.KeyEvent.VK_W);
+        driver.keyRelease(java.awt.event.KeyEvent.VK_S);
+        driver.keyRelease(java.awt.event.KeyEvent.VK_A);
+        driver.keyPress(java.awt.event.KeyEvent.VK_D);
         
-    elseif p == 9
-        driver.keyPress(java.awt.event.KeyEvent.VK_UP);
-        driver.keyRelease(java.awt.event.KeyEvent.VK_SPACE);
-        driver.keyLeft(java.awt.event.KeyEvent.VK_LEFT);
-        driver.keyRelease(java.awt.event.KeyEvent.VK_RIGHT);
+     elseif p == 9
+        driver.keyPress(java.awt.event.KeyEvent.VK_W);
+        driver.keyRelease(java.awt.event.KeyEvent.VK_S);
+        driver.keyLeft(java.awt.event.KeyEvent.VK_A);
+        driver.keyRelease(java.awt.event.KeyEvent.VK_D);
     
-    else
-        break;
+     %else
+     %   break;
+     
+     pause(1); % snapshot every second
         
-    end
+     end
     
-    fprintf('The program has stopped.');
 end
+
+fprintf('The program has stopped.');
