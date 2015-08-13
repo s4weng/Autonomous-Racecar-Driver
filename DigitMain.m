@@ -4,13 +4,12 @@ close all;
 % initialize layer sizes (one hidden layer)
 input_layer_size  = 400;  % 20*20 pixels
 hidden_layer_size = 30;
-output_layer_size = 16; % see parse.m for output representation
+output_layer_size = 11; % 1-11
 
 % load data
-load('imgData.mat');
+load('SpeedImgData.mat');
 X = +final;
-yVals = xlsread('DataResults.xlsx');
-y = parse(yVals);
+y = xlsread('DataDigitResults.xlsx');
 m = size(X, 1);
 clear final;
 
@@ -24,7 +23,7 @@ initial_nn_params = [initial_Theta1(:) ; initial_Theta2(:)];
 options = optimset('MaxIter', 250);
 lambda = 1;
 
-costFunction = @(p) CostFunction(p, ...
+costFunction = @(p) DigitCostFunction(p, ...
                                    input_layer_size, ...
                                    hidden_layer_size, ...
                                    output_layer_size, X, y, lambda);

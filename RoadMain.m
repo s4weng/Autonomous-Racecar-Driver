@@ -7,10 +7,10 @@ hidden_layer_size = 30;
 output_layer_size = 16; % see parse.m for output representation
 
 % load data
-load('imgData.mat');
+load('RoadImgData.mat');
 X = +final;
-yVals = xlsread('DataResults.xlsx');
-y = parse(yVals);
+yVals = xlsread('DataRoadResults.xlsx');
+y = RoadParse(yVals);
 m = size(X, 1);
 clear final;
 
@@ -24,7 +24,7 @@ initial_nn_params = [initial_Theta1(:) ; initial_Theta2(:)];
 options = optimset('MaxIter', 250);
 lambda = 1;
 
-costFunction = @(p) CostFunction(p, ...
+costFunction = @(p) RoadCostFunction(p, ...
                                    input_layer_size, ...
                                    hidden_layer_size, ...
                                    output_layer_size, X, y, lambda);

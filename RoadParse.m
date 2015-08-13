@@ -1,4 +1,4 @@
-function yVals = parse(y)
+function yVals = RoadParse(y)
 
 rows = size(y, 1);
 yVals = [];
