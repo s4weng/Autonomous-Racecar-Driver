@@ -29,19 +29,12 @@ while true
 %  0   0    0     0      1
 %  0   0    0     1      2
 %  0   0    1     0      3
-%  0   0    1     1      4
-%  0   1    0     0      5
-%  0   1    0     1      6
-%  0   1    1     0      7
-%  0   1    1     1      8
-%  1   0    0     0      9
-%  1   0    0     1      10
-%  1   0    1     0      11
-%  1   0    1     1      12
-%  1   1    0     0      13
-%  1   1    0     1      14
-%  1   1    1     0      15
-%  1   1    1     1      16
+%  0   1    0     0      4
+%  0   1    0     1      5
+%  0   1    1     0      6
+%  1   0    0     0      7
+%  1   0    0     1      8
+%  1   0    1     0      9
 
 % all keys are typed out because they are held down unless released
     if p == 1
@@ -62,31 +55,31 @@ while true
         driver.keyPress(java.awt.event.KeyEvent.VK_A);
         driver.keyRelease(java.awt.event.KeyEvent.VK_D);
         
-    elseif p == 5
+    elseif p == 4
         driver.keyRelease(java.awt.event.KeyEvent.VK_W);
         driver.keyPress(java.awt.event.KeyEvent.VK_S);
         driver.keyRelease(java.awt.event.KeyEvent.VK_A);
         driver.keyRelease(java.awt.event.KeyEvent.VK_D);
         
-    elseif p == 6
+    elseif p == 5
         driver.keyRelease(java.awt.event.KeyEvent.VK_W);
         driver.keyPress(java.awt.event.KeyEvent.VK_S);
         driver.keyRelease(java.awt.event.KeyEvent.VK_A);
         driver.keyPress(java.awt.event.KeyEvent.VK_D);
         
-    elseif p == 7
+    elseif p == 6
         driver.keyRelease(java.awt.event.KeyEvent.VK_W);
         driver.keyPress(java.awt.event.KeyEvent.VK_S);
         driver.keyPress(java.awt.event.KeyEvent.VK_A);
         driver.keyRelease(java.awt.event.KeyEvent.VK_D);
         
-    elseif p == 9
+    elseif p == 7
         driver.keyPress(java.awt.event.KeyEvent.VK_W);
         driver.keyRelease(java.awt.event.KeyEvent.VK_S);
         driver.keyRelease(java.awt.event.KeyEvent.VK_A);
         driver.keyRelease(java.awt.event.KeyEvent.VK_D);
         
-    elseif p == 10
+    elseif p == 8
         driver.keyPress(java.awt.event.KeyEvent.VK_W);
         driver.keyRelease(java.awt.event.KeyEvent.VK_S);
         driver.keyRelease(java.awt.event.KeyEvent.VK_A);
