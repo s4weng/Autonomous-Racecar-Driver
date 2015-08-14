@@ -3,7 +3,7 @@ close all;
 
 % initialize layer sizes (one hidden layer)
 input_layer_size  = 400;  % 20*20 pixels
-hidden_layer_size = 30;
+hidden_layer_size = 25;
 output_layer_size = 11; % 1-11
 
 % load data
@@ -11,7 +11,6 @@ load('SpeedImgData.mat');
 X = +final;
 y = xlsread('DataDigitResults.xlsx');
 m = size(X, 1);
-clear final;
 
 % initialize theta parameters
 initial_Theta1 = RandInit(input_layer_size, hidden_layer_size);
