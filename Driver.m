@@ -2,12 +2,13 @@ clear all;
 
 driver = java.awt.Robot;
 
-load('TrainedParams.mat');
+load('TrainedRoadParams.mat');
 
 while true
     
     % take screenshot and edit image
-    img = screenShotRGB(500, 300, 901, 301);
+    img = screenShotRGB;
+    img = imcrop(img, [500 300 900 300]);
     resizedImg = imresize(img, 0.2);
     hsvImage = rgb2hsv(resizedImg);
 	sImage = hsvImage(:,:,2) * 2; % increase saturation 100%
