@@ -1,9 +1,9 @@
-% creates the data for training
+clear all;
 
-final = logical.empty;
+X = logical.empty;
 load('TrainedDigitParams.mat');
 
-for i = 1:553
+for i = 2:302
     
     % read in image
     imgFile = sprintf('Snapshots/out%d.png', i);
@@ -17,25 +17,45 @@ for i = 1:553
     finalImg = im2bw(sImage);
     
     % crop the speedometer, use it as a feature
-%     croppedImg1 = imcrop(img, [5.5 7.5 56 70]);
-%     croppedImg2 = imcrop(img, [65.5 7.5 56 70]);
-%     croppedImg3 = imcrop(img, [120.5 7.5 56 70]);
-%     
-%     croppedImg1 = imresize(croppedImg1, [20 20]);
-%     croppedImg2 = imresize(croppedImg2, [20 20]);
-%     croppedImg3 = imresize(croppedImg3, [20 20]);
-% 
-%     p1 = Predict(Theta1, Theta2, reshape(croppedImg1, [1, size(croppedImg1, 1)*size(croppedImg1, 2)]));
-%     p2 = Predict(Theta1, Theta2, reshape(croppedImg2, [1, size(croppedImg2, 1)*size(croppedImg2, 2)]));
-%     p3 = Predict(Theta1, Theta2, reshape(croppedImg3, [1, size(croppedImg3, 1)*size(croppedImg3, 2)]));
-  
+    img = imcrop(img, [1670 1005 180 75]);
+    img = im2bw(img);
+    croppedImg1 = imcrop(img, [5.5 7.5 56 70]);
+    croppedImg2 = imcrop(img, [65.5 7.5 56 70]);
+    croppedImg3 = imcrop(img, [120.5 7.5 56 70]);
+     
+    croppedImg1 = imresize(croppedImg1, [20 20]);
+    croppedImg2 = imresize(croppedImg2, [20 20]);
+    croppedImg3 = imresize(croppedImg3, [20 20]);
+ 
+    [p1, i1] = Predict(Theta1, Theta2, reshape(croppedImg1, [1, size(croppedImg1, 1)*size(croppedImg1, 2)]));
+    [p2, i2] = Predict(Theta1, Theta2, reshape(croppedImg2, [1, size(croppedImg2, 1)*size(croppedImg2, 2)]));
+    [p3, i3] = Predict(Theta1, Theta2, reshape(croppedImg3, [1, size(croppedImg3, 1)*size(croppedImg3, 2)]));
+      
+    % calculate speed from individual digits
+    i1 = double(i1);
+    i2 = double(i2);
+    i3 = double(i3);
     
+    if i1 == 11 % index 11 represents value 0
+        i1 = 0;
+    end
+    
+    speed = i1 * 100 + i2 * 10 + i3;
+    
+    % we pass in whether the vehicle is going over 150
+    tooFast = logical.empty;
+    if (speed > 150)
+        tooFast = true;
+    else
+        tooFast = false;
+    end
+        
     % unroll image matrix into vector, show and save
-    final = [final; reshape(finalImg, [1, size(finalImg, 1)*size(finalImg, 2)])];
-    imshow(finalImg);
+    X = [X; reshape(finalImg, [1, size(finalImg, 1)*size(finalImg, 2)]) tooFast];
+    % imshow(finalImg);
     filename = sprintf('ParsedSnapshots/o%d.png', i);
     imwrite(finalImg, filename, 'png');
     
 end
 
-save('imgData.mat', 'final');
+save('RoadImgData.mat', 'X');

@@ -8,7 +8,7 @@ output_layer_size = 16; % see parse.m for output representation
 
 % load data
 load('RoadImgData.mat');
-X = +final;
+X = +X;
 yVals = xlsread('DataRoadResults.xlsx');
 y = RoadParse(yVals);
 m = size(X, 1);
