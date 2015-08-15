@@ -16,17 +16,19 @@ Theta1_grad = zeros(size(Theta1));
 Theta2_grad = zeros(size(Theta2));
 
 X = [ones(m, 1) X];
+
 a2 = Sigmoid(X * Theta1');
 a2 = [ones(m, 1) a2];
 h = Sigmoid(a2 * Theta2');
 
-y16 = y == 1;
+y9 = y == 1;
 for c = 2:output_layer_size
-    y16 = [y16 (y == c)];
+    y9 = [y9 (y == c)];
 end
 
-pos = -1 * y16 .* log(h);
-neg = (1 - y16) .* log(1 - h);
+pos = -1 * y9 .* log(h);
+neg = (1 - y9) .* log(1 - h);
+
 
 reg = (lambda/(2*m))*(sum(sum(Theta1(:, 2:end).^2)) + sum(sum(Theta2(:, 2:end).^2)));
 
@@ -43,7 +45,7 @@ for t = 1:m
     a3 = Sigmoid(z3);
     
     % delta (error) calculation
-    delta3 = a3 - y16(t, :);
+    delta3 = a3 - y9(t, :);
     temp = Theta2' * delta3';
     temp = temp(2:end, :); % lose the bias
     delta2 = temp' .* SigmoidGradient(z2);

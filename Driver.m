@@ -3,26 +3,63 @@ clear all;
 driver = java.awt.Robot;
 
 load('TrainedRoadParams.mat');
+Road_Theta1 = Theta1;
+Road_Theta2 = Theta2;
+
+load('TrainedDigitParams.mat');
 
 while true
     
     % take screenshot and edit image
     img = screenShotRGB;
-    img = imcrop(img, [500 300 900 300]);
-    resizedImg = imresize(img, 0.2);
+    croppedImg = imcrop(img, [500 300 900 300]);
+    resizedImg = imresize(croppedImg, 0.2);
     hsvImage = rgb2hsv(resizedImg);
 	sImage = hsvImage(:,:,2) * 2; % increase saturation 100%
     finalImg = im2bw(sImage);
-
-    % create features
-    final = logical.empty;
-    final = [final; reshape(finalImg, [1, size(finalImg, 1)*size(finalImg, 2)])];
-    final = [1 final];
     
+    % crop the speedometer, use it as a feature
+    img = imcrop(img, [1670 1005 180 75]);
+    img = im2bw(img);
+    croppedImg1 = imcrop(img, [5.5 7.5 56 70]);
+    croppedImg2 = imcrop(img, [65.5 7.5 56 70]);
+    croppedImg3 = imcrop(img, [120.5 7.5 56 70]);
+     
+    croppedImg1 = imresize(croppedImg1, [20 20]);
+    croppedImg2 = imresize(croppedImg2, [20 20]);
+    croppedImg3 = imresize(croppedImg3, [20 20]);
+ 
+    [p1, i1] = Predict(Theta1, Theta2, reshape(croppedImg1, [1, size(croppedImg1, 1)*size(croppedImg1, 2)]));
+    [p2, i2] = Predict(Theta1, Theta2, reshape(croppedImg2, [1, size(croppedImg2, 1)*size(croppedImg2, 2)]));
+    [p3, i3] = Predict(Theta1, Theta2, reshape(croppedImg3, [1, size(croppedImg3, 1)*size(croppedImg3, 2)]));
+      
+    % calculate speed from individual digits
+    i1 = double(i1);
+    i2 = double(i2);
+    i3 = double(i3);
+    
+    if i1 == 11 % index 11 represents value 0
+        i1 = 0;
+    end
+    
+    speed = i1 * 100 + i2 * 10 + i3;
+    
+    % we pass in whether the vehicle is going over 100
+    tooFast = logical.empty;
+    if (speed > 100)
+        tooFast = true;
+    else
+        tooFast = false;
+    end
+    
+    final = logical.empty;
+    final = reshape(finalImg, [1, size(finalImg, 1)*size(finalImg, 2)]);
+    final = [1 final tooFast];
+
     % find prediction
-    h1 = Sigmoid(final * Theta1');
+    h1 = Sigmoid(final * Road_Theta1');
     h1 = [1 h1];
-    h2 = Sigmoid(h1 * Theta2');
+    h2 = Sigmoid(h1 * Road_Theta2');
     [p, p] = max(h2)
     
     
