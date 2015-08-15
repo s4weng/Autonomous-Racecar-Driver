@@ -132,7 +132,7 @@ while true
      %else
      %   break;
      
-     pause(1); % snapshot every second
+     pause(0.25); % snapshot every second
         
      end
     
