@@ -28,8 +28,8 @@ end
 % duplicate data for 0 (speed under 70), 1 (70-100), 2 (over 100)
 X = repmat(X, 3, 1);
 X = [X zeros(size(X, 1))];
-X(1:1019, end) = 0;
-X(1020:2039, end) = 1;
-X(2040:3059, end) = 2;
+X(1:1019, end) = 2;
+X(1020:2038, end) = 3;
+X(2039:3057, end) = 4;
 
 save('RoadImgData.mat', 'X');

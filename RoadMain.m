@@ -2,7 +2,7 @@ clear all;
 close all;
 
 % initialize layer sizes (one hidden layer)
-input_layer_size  = 11042;  % Whether car is too fast, and 61*181 pixels
+input_layer_size  = 23025;  % unrolled pixels followed by speed of car
 hidden_layer_size = 30;
 output_layer_size = 9; % see parse.m for output representation
 
