@@ -25,7 +25,7 @@ for i = 1:1019
     
 end
 
-% duplicate data for 0 (speed under 70), 1 (70-100), 2 (over 100)
+% duplicate data for 2 (speed under 70), 3 (70-100), 4 (over 100)
 X = repmat(X, 3, 1);
 X = [X zeros(size(X, 1))];
 X(1:1019, end) = 2;

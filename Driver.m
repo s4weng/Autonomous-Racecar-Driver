@@ -12,7 +12,7 @@ while true
     
     % take screenshot and edit image
     img = screenShotRGB;
-    croppedImg = imcrop(img, [500 300 900 300]);
+    croppedImg = imcrop(img, [0.5 600 1920 256.5]);
     resizedImg = imresize(croppedImg, 0.2);
     hsvImage = rgb2hsv(resizedImg);
 	sImage = hsvImage(:,:,2) * 2; % increase saturation 100%
@@ -45,16 +45,18 @@ while true
     speed = i1 * 100 + i2 * 10 + i3;
     
     % we pass in whether the vehicle is going over 100
-    tooFast = logical.empty;
+    speed = double.empty;
     if (speed > 100)
-        tooFast = true;
+        speed = 2;
+    elsif (speed > 70)
+        speed = 3;
     else
-        tooFast = false;
+        speed = 4;
     end
     
     final = logical.empty;
     final = reshape(finalImg, [1, size(finalImg, 1)*size(finalImg, 2)]);
-    final = [1 final tooFast];
+    final = [1 final speed];
 
     % find prediction
     h1 = Sigmoid(final * Road_Theta1');
