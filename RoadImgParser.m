@@ -42,9 +42,9 @@ for i = 2:302
     
     speed = i1 * 100 + i2 * 10 + i3;
     
-    % we pass in whether the vehicle is going over 150
+    % we pass in whether the vehicle is going over 100
     tooFast = logical.empty;
-    if (speed > 150)
+    if (speed > 100)
         tooFast = true;
     else
         tooFast = false;
