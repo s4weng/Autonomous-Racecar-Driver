@@ -17,7 +17,7 @@ while true
     hsvImage = rgb2hsv(resizedImg);
 	sImage = hsvImage(:,:,2) * 2; % increase saturation 100%
     finalImg = im2bw(sImage);
-    
+        
     % crop the speedometer, use it as a feature
     img = imcrop(img, [1670 1005 180 75]);
     img = im2bw(img);
@@ -34,21 +34,25 @@ while true
     [p3, i3] = Predict(Theta1, Theta2, reshape(croppedImg3, [1, size(croppedImg3, 1)*size(croppedImg3, 2)]));
       
     % calculate speed from individual digits
-    i1 = double(i1);
-    i2 = double(i2);
-    i3 = double(i3);
+    i1 = double(i1)
+    i2 = double(i2)
+    i3 = double(i3)
     
     if i1 == 11 % index 11 represents value 0
         i1 = 0;
+    end
+    
+    if i2 == 11
+        i2 = 0;
     end
     
     speed = i1 * 100 + i2 * 10 + i3;
     
     % we pass in whether the vehicle is going over 100
     speed = double.empty;
-    if (speed > 100)
+    if (speed < 70)
         speed = 2;
-    elsif (speed > 70)
+    elsif (speed < 100)
         speed = 3;
     else
         speed = 4;
@@ -62,7 +66,7 @@ while true
     h1 = Sigmoid(final * Road_Theta1');
     h1 = [1 h1];
     h2 = Sigmoid(h1 * Road_Theta2');
-    [p, p] = max(h2)
+    [p, p] = max(h2);
     
     
 % Up Brake Left Right Output
@@ -128,7 +132,7 @@ while true
      elseif p == 9
         driver.keyPress(java.awt.event.KeyEvent.VK_W);
         driver.keyRelease(java.awt.event.KeyEvent.VK_S);
-        driver.keyLeft(java.awt.event.KeyEvent.VK_A);
+        driver.keyPress(java.awt.event.KeyEvent.VK_A);
         driver.keyRelease(java.awt.event.KeyEvent.VK_D);
     
      %else

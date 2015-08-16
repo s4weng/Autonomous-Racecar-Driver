@@ -25,14 +25,10 @@ for i = 1:1019
     
 end
 
-fprintf('X: %f %f\n', size(X, 1), size(X, 2));
-
 % duplicate data for 2 (speed under 70), 3 (70-100), 4 (over 100)
 X = repmat(X, 3, 1);
-fprintf('X after repmat: %f %f\n', size(X, 1), size(X, 2));
 
 X = [X zeros(size(X, 1), 1)];
-fprintf('X after appending zeros column: %f %f\n', size(X, 1), size(X, 2));
 
 X(1:1019, end) = 2;
 X(1020:2038, end) = 3;
