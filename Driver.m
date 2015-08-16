@@ -17,6 +17,8 @@ while true
     hsvImage = rgb2hsv(resizedImg);
 	sImage = hsvImage(:,:,2) * 2; % increase saturation 100%
     finalImg = im2bw(sImage);
+    
+    imshow(finalImg);
         
     % crop the speedometer, use it as a feature
     img = imcrop(img, [1670 1005 180 75]);
@@ -34,9 +36,9 @@ while true
     [p3, i3] = Predict(Theta1, Theta2, reshape(croppedImg3, [1, size(croppedImg3, 1)*size(croppedImg3, 2)]));
       
     % calculate speed from individual digits
-    i1 = double(i1)
-    i2 = double(i2)
-    i3 = double(i3)
+    i1 = double(i1);
+    i2 = double(i2);
+    i3 = double(i3);
     
     if i1 == 11 % index 11 represents value 0
         i1 = 0;
@@ -47,17 +49,16 @@ while true
     end
     
     speed = i1 * 100 + i2 * 10 + i3;
-    
+        
     % we pass in whether the vehicle is going over 100
-    speed = double.empty;
     if (speed < 70)
         speed = 2;
-    elsif (speed < 100)
+    elseif (speed < 100)
         speed = 3;
     else
         speed = 4;
     end
-    
+            
     final = logical.empty;
     final = reshape(finalImg, [1, size(finalImg, 1)*size(finalImg, 2)]);
     final = [1 final speed];

@@ -3,7 +3,7 @@ close all;
 
 % initialize layer sizes (one hidden layer)
 input_layer_size  = 400;  % 20*20 pixels
-hidden_layer_size = 20;
+hidden_layer_size = 25;
 output_layer_size = 11; % 1-11
 
 % load data
@@ -19,7 +19,7 @@ initial_Theta2 = RandInit(hidden_layer_size, output_layer_size);
 % Unroll parameters
 initial_nn_params = [initial_Theta1(:) ; initial_Theta2(:)];
 
-options = optimset('MaxIter', 200);
+options = optimset('MaxIter', 300);
 lambda = 1;
 
 costFunction = @(p) DigitCostFunction(p, ...
