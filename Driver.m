@@ -18,7 +18,7 @@ while true
 	sImage = hsvImage(:,:,2) * 2; % increase saturation 100%
     finalImg = im2bw(sImage);
     
-    imshow(finalImg);
+    % imshow(finalImg);
         
     % crop the speedometer, use it as a feature
     img = imcrop(img, [1670 1005 180 75]);
@@ -51,7 +51,7 @@ while true
     speed = i1 * 100 + i2 * 10 + i3;
         
     % we pass in whether the vehicle is going over 100
-    if (speed < 70)
+    if (speed < 80)
         speed = 2;
     elseif (speed < 100)
         speed = 3;
@@ -139,7 +139,7 @@ while true
      %else
      %   break;
      
-     pause(0.25); % snapshot every second
+     pause(0.01); % snapshot every second
         
      end
     
